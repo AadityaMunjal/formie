@@ -1,5 +1,7 @@
 import { BsArrowRightShort } from "react-icons/bs"
 
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <>
@@ -14,11 +16,11 @@ export default function Home() {
             Your go-to solution to make awesome forms!!
           </p>
 
-          <a href="/components/auth/Socials">
+          <Link href="/components/auth/Socials">
             <button className="flex flex-row justify-center items-center m-6 bg-white p-2 px-2 rounded-lg shadow font-poppins font-medium text-xl sm:p-3 sm:px-6 hover:shadow-xl">
               Sign Up <BsArrowRightShort size="30" />
             </button>
-          </a>
+          </Link>
 
           <div className="mt-16 h-44 w-44 p-8 rounded-full circle"></div>
         </p>

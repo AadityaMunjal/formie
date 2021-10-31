@@ -3,6 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth"
 
 import { Stack, Switch } from "@chakra-ui/react"
 
+import Link from 'next/link'
+import Image from 'next/image'
 import SignOut from "./auth/Sign-Out"
 
 export default function Header() {
@@ -11,9 +13,11 @@ export default function Header() {
   console.log(user)
   const Li = props => {
     return (
-      <a href={props.url} className="cursor-pointer m-2 ">
-        <li>{props.text}</li>
-      </a>
+      <li className="cursor-pointer m-2">
+      <Link href={props.url} >
+        {props.text}
+      </Link>
+      </li>
     )
   }
 
@@ -26,12 +30,14 @@ export default function Header() {
       </ul>
       <p className="flex flex-row items-center">
         {user ? (
-          <a href="/components/Account">
-            <img
+          <Link href="/components/Account">
+            <Image
               src={user.photoURL}
               className="w-14 h-14 rounded-full cursor-pointer hover:shadow-xl"
-            />{" "}
-          </a>
+              width={50}
+              height={50}
+            />
+          </Link>
         ) : null}
 
         {user ? <SignOut /> : null}
