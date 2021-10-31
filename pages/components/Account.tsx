@@ -11,7 +11,6 @@ export default function Account() {
   return (
     <>
       <Header />
-
       <div>
         <div className="flex flex-row w-screen justify-center items-center">
           {user ? (
