@@ -1,25 +1,23 @@
-import { auth } from "../../firebase.config"
-import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import { Stack, Switch } from "@chakra-ui/react"
+import { Stack, Switch } from "@chakra-ui/react";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import SignOut from "./auth/Sign-Out"
+import Link from "next/link";
+import Image from "next/image";
+import SignOut from "./auth/Sign-Out";
 
 export default function Header() {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
-  console.log(user)
-  const Li = props => {
+  console.log(user);
+  const Li = (props) => {
     return (
       <li className="cursor-pointer m-2">
-      <Link href={props.url} >
-        {props.text}
-      </Link>
+        <Link href={props.url}>{props.text}</Link>
       </li>
-    )
-  }
+    );
+  };
 
   return (
     <header className="w-screen bg-white flex flex-row justify-between items-center p-1 rounded shadow">
@@ -47,5 +45,5 @@ export default function Header() {
         </Stack>
       </p>
     </header>
-  )
+  );
 }

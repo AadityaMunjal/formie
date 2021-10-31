@@ -1,13 +1,13 @@
-import Home from "./Home"
+import Home from "./Home";
 
-import Meta from "./components/Meta"
-import Header from "./components/Header"
+import Meta from "./components/Meta";
+import Header from "./components/Header";
 
-import { useAuthState } from "react-firebase-hooks/auth"
-import { auth } from "../firebase.config"
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase.config";
 
 export default function App() {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
   return (
     <>
@@ -15,5 +15,5 @@ export default function App() {
       <Header />
       <Home />
     </>
-  )
+  );
 }

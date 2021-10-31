@@ -1,15 +1,22 @@
-import Header from "./Header"
+import Header from "./Header";
 
-import { Stack, Checkbox, Input, FormControl, FormLabel, Select, Radio, RadioGroup } from "@chakra-ui/react"
-import { MdOutlineImage } from 'react-icons/md'
+import {
+  Stack,
+  Checkbox,
+  Input,
+  FormControl,
+  FormLabel,
+  Select,
+  Radio,
+  RadioGroup,
+} from "@chakra-ui/react";
+import { MdOutlineImage } from "react-icons/md";
 
-
-import { auth } from "../../firebase.config"
-import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function CreateForm() {
-  const [user] = useAuthState(auth)
-
+  const [user] = useAuthState(auth);
 
   return (
     <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
@@ -65,15 +72,15 @@ export default function CreateForm() {
 
         <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
           <div className="flex flex-row items-center">
-            <Select placeholder="Short Answer" >
+            <Select placeholder="Short Answer">
               <option value="option1">Mutiple Choice</option>
               <option value="option2">Checkbox</option>
               <option value="option3">Date</option>
             </Select>
 
-           <button className="h-10 w-12 flex justify-center items-center rounded p-1 mx-4 bg-purple-600 focus:ring-2">
-          <MdOutlineImage className="text-white text-2xl"/>
-           </button>
+            <button className="h-10 w-12 flex justify-center items-center rounded p-1 mx-4 bg-purple-600 focus:ring-2">
+              <MdOutlineImage className="text-white text-2xl" />
+            </button>
           </div>
 
           <FormControl isRequired>
@@ -85,23 +92,20 @@ export default function CreateForm() {
             />
           </FormControl>
 
-           <RadioGroup className="flex flex-col my-4 text-xl" >
-           <FormLabel> Who is ur fav Uwu? </FormLabel>
-        <Radio value="1">Harry Potter</Radio>
-        <Radio value="2">Ronald</Radio>
-        <Radio value="3">Nope</Radio>
-        </RadioGroup>
-       
+          <RadioGroup className="flex flex-col my-4 text-xl">
+            <FormLabel> Who is ur fav Uwu? </FormLabel>
+            <Radio value="1">Harry Potter</Radio>
+            <Radio value="2">Ronald</Radio>
+            <Radio value="3">Nope</Radio>
+          </RadioGroup>
 
-       <div className="flex flex-col my-4 text-xl">
-       <FormLabel> Select all that apply </FormLabel>
-  <Checkbox >Checkbox</Checkbox>
-  <Checkbox>
-    Checkbox
-  </Checkbox>
-</div>
+          <div className="flex flex-col my-4 text-xl">
+            <FormLabel> Select all that apply </FormLabel>
+            <Checkbox>Checkbox</Checkbox>
+            <Checkbox>Checkbox</Checkbox>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

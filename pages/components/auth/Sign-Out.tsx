@@ -1,10 +1,10 @@
-import { auth } from "../../../firebase.config"
-import { signOut } from "firebase/auth"
+import { auth } from "../../../firebase.config";
+import { signOut } from "firebase/auth";
 
 export default function SignOut() {
   const signOutBoi = () => {
-    signOut(auth)
-  }
+    signOut(auth);
+  };
   return (
     <>
       <button
@@ -14,5 +14,5 @@ export default function SignOut() {
         Sign Out
       </button>
     </>
-  )
+  );
 }

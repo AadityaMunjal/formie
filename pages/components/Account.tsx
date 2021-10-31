@@ -1,12 +1,12 @@
-import { auth } from "../../firebase.config"
-import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import Header from "./Header"
-import Forms from "./Forms"
-import Link from "next/link"
+import Header from "./Header";
+import Forms from "./Forms";
+import Link from "next/link";
 
 export default function Account() {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
   return (
     <>
@@ -30,5 +30,5 @@ export default function Account() {
         <Forms />
       </div>
     </>
-  )
+  );
 }

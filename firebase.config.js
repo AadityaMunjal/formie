@@ -1,5 +1,5 @@
-import { initializeApp, getApps, getApp } from "firebase/app"
-import { getAuth } from "firebase/auth"
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 const config = {
   apiKey: process.env["NEXT_PUBLIC_FIREBASE_API_KEY"],
@@ -8,7 +8,7 @@ const config = {
   storageBucket: process.env["NEXT_PUBLIC_STORAGE_BUCKET"],
   messagingSenderId: process.env["NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER"],
   appId: process.env["NEXT_PUBLIC_FIREBASE_APP_ID"],
-}
+};
 
-const app = !getApps().length ? initializeApp(config) : getApp()
-export const auth = getAuth(app)
+const app = !getApps().length ? initializeApp(config) : getApp();
+export const auth = getAuth(app);

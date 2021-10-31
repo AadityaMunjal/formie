@@ -1,33 +1,33 @@
-import { AiFillGithub } from "react-icons/ai"
-import { FcGoogle } from "react-icons/fc"
+import { AiFillGithub } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 
-import Account from "../Account"
+import Account from "../Account";
 
-import { auth } from "../../../firebase.config"
+import { auth } from "../../../firebase.config";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   GithubAuthProvider,
-} from "firebase/auth"
+} from "firebase/auth";
 
-import { useAuthState } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import Header from "../Header"
+import Header from "../Header";
 
 export default function Socials() {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
   const signIn = () => {
-    const provider = new GoogleAuthProvider()
+    const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
-  }
+    signInWithPopup(auth, provider);
+  };
 
   const signInWithGithub = () => {
-    const provider = new GithubAuthProvider()
+    const provider = new GithubAuthProvider();
 
-    signInWithPopup(auth, provider)
-  }
+    signInWithPopup(auth, provider);
+  };
 
   return (
     <>
@@ -54,5 +54,5 @@ export default function Socials() {
         </div>
       )}
     </>
-  )
+  );
 }
