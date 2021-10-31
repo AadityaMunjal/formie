@@ -1,0 +1,34 @@
+{
+  "name": "next12",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.10",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "firebase": "^9.2.0",
+    "framer-motion": "^5.0.0",
+    "next": "12.0.1",
+    "prettier": "^2.4.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^4.0.0",
+    "react-icons": "^4.3.1",
+    "sass": "^1.43.4",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "autoprefixer": "^10.4.0",
+    "eslint": "7",
+    "eslint-config-next": "12.0.1",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19"
+  }
+}
