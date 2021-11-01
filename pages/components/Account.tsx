@@ -2,7 +2,6 @@ import { auth } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import Header from "./Header";
-import Forms from "./Forms";
 import Link from "next/link";
 
 export default function Account() {
@@ -20,14 +19,22 @@ export default function Account() {
             </p>
           ) : null}
 
-          <Link href="/components/CreateForm">
+          <Link href="/components/form">
             <button className="mx-6 rounded-lg m-4 p-3 px-5 font-medium text-white text-xl focus:ring-4 duration-200 bg-indigo-500">
               Create Form
             </button>
           </Link>
         </div>
 
-        <Forms />
+        <div className="h-screen w-screen flex flex-row">
+          <button className="mx-6 w-48 h-44 rounded-lg m-4 p-3 px-5 font-medium bg-green-500 text-white text-xl focus:ring-8 duration-200 flex justify-center items-center focus:ring-purple-300">
+            Form 1
+          </button>
+
+          <button className="mx-6 w-48 h-44 rounded-lg m-4 p-3 px-5 font-medium bg-green-500 text-white text-xl focus:ring-8 duration-200 flex justify-center items-center focus:ring-purple-300">
+            Form 2
+          </button>
+        </div>
       </div>
     </>
   );
