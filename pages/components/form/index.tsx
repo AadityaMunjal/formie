@@ -56,7 +56,7 @@ export default function CreateForm() {
         <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
           <div className="flex flex-row items-center">
             <Select onChange={(e) => setVal(e.target.value)}>
-              <option value="short" isDefault>
+              <option value="short">
                 {" "}
                 Short Answer{" "}
               </option>
