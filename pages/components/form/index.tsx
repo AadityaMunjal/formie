@@ -15,7 +15,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
-  const [val, setVal] = useState<string>();
+  const [val, setVal] = useState('');
 
   return (
     <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
