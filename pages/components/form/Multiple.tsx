@@ -6,7 +6,6 @@ export default function Multiple() {
   let [opt, setOpt] = useState("");
   let [options, setOptions] = useState([]);
 
-  console.log(options);
   const addOption = () => {
     setOptions([...options, opt]);
   };
@@ -35,7 +34,7 @@ export default function Multiple() {
       <Radio value="3">Nope</Radio> */}
 
       {options.map((d) => {
-        return <Radio value={d}> {d} </Radio>;
+        return <Radio value={d} key={d}> {d} </Radio>;
       })}
     </RadioGroup>
   );
