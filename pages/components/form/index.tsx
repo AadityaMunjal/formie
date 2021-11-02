@@ -68,7 +68,7 @@ export default function CreateForm() {
             </button>
           </div>
 
-          {val == "mcq" ? <Multiple /> : <Text />}
+          {val === "mcq" ? <Multiple /> : <Text />}
         </div>
       </div>
     </div>

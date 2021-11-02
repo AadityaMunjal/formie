@@ -10,7 +10,6 @@ import SignOut from "./auth/Sign-Out";
 export default function Header() {
   const [user] = useAuthState(auth);
 
-  console.log(user);
   const Li = (props) => {
     return (
       <li className="cursor-pointer m-2">
