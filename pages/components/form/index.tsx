@@ -9,13 +9,17 @@ import { useState } from "react";
 
 import { Input, Select } from "@chakra-ui/react";
 import { MdOutlineImage } from "react-icons/md";
+import { BiPaperPlane } from "react-icons/bi";
 
 import { auth } from "../../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState("");
+
+  let [short, setShort] = useState("");
+  let [mcqQues, setMcqQues] = useState("");
 
   return (
     <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
@@ -25,10 +29,12 @@ export default function CreateForm() {
           <p className="flex flex-row items-center">
             <Logo />
 
-            <span className="mx-4 text-2xl font-poppins text-gray-900">
-              {" "}
-              Untitled Form
-            </span>
+            <Input
+              placeholder="Untitled Form"
+              size="xl"
+              variant="flushed"
+              className="mx-4 text-2xl font-medium"
+            />
           </p>
         </header>
       </div>
@@ -37,6 +43,9 @@ export default function CreateForm() {
       </p>
 
       <div className="w-full grid justify-items-center">
+        <button className="flex flex-row justify-center items-center p-3 px-5 rounded-md bg-purple-600 text-white text-xl focus:ring-4 ring-purple-300">
+          Send <BiPaperPlane size={25} className="mx-2" />
+        </button>
         <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
           <Input
             placeholder="Heading goes brr..."
@@ -53,13 +62,20 @@ export default function CreateForm() {
           />
         </div>
 
+        <button className="font-medium cursor-pointer px-4 py-2 h-full bg-white rounded mx-2 shadow hover:bg-white-700 focus:ring-4">
+          Add Question
+        </button>
+
         <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
+          <div className="w-full flex justify-center">
+            <button className="my-2 mb-4 px-6 py-2 rounded font-mdeium text-white bg-red-600 focus:ring-2 ring-red-300">
+              Delete
+            </button>
+          </div>
+
           <div className="flex flex-row items-center">
             <Select onChange={(e) => setVal(e.target.value)}>
-              <option value="short">
-                {" "}
-                Short Answer{" "}
-              </option>
+              <option value="short"> Short Answer </option>
               <option value="mcq">Mutiple Choice</option>
             </Select>
 
@@ -68,7 +84,11 @@ export default function CreateForm() {
             </button>
           </div>
 
-          {val === "mcq" ? <Multiple /> : <Text />}
+          {val === "mcq" ? (
+            <Multiple onChange={(e) => setMcqQues(e.target.value)} />
+          ) : (
+            <Text onChange={(e) => setShort(e.target.value)} />
+          )}
         </div>
       </div>
     </div>

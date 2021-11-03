@@ -1,6 +1,8 @@
 import { FormControl, Input } from "@chakra-ui/react";
 
-export default function Text() {
+import { useState } from "react";
+
+export default function Text(props) {
   return (
     <>
       <FormControl isRequired>
@@ -9,6 +11,7 @@ export default function Text() {
           className="font-poppins font-medium m-2"
           size="lg"
           variant="flushed"
+          onChange={props.onChange}
         />
 
         <Input
