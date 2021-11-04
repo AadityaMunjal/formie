@@ -2,12 +2,13 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
 import Account from "../Account";
+import Meta from "../Meta";
 
 import { auth } from "../../../firebase.config";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  GithubAuthProvider,
+  GithubAuthProvider
 } from "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -31,6 +32,7 @@ export default function Socials() {
 
   return (
     <>
+      <Meta title="Formie-Sign Up/Sign-In" />
       {user ? null : <Header />}
       {user ? (
         <Account />
