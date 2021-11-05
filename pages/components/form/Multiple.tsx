@@ -2,7 +2,7 @@ import { Input, RadioGroup, FormLabel, Radio } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-export default function Multiple() {
+export default function Multiple({onChange}) {
   let [opt, setOpt] = useState("");
   let [options, setOptions] = useState([]);
 

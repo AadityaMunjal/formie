@@ -1,6 +1,6 @@
 import { FormControl, Input } from "@chakra-ui/react";
 
-export default function Text() {
+export default function Text({onChange}) {
   return (
     <>
       <FormControl isRequired>
