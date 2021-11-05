@@ -27,7 +27,6 @@ export default function CreateForm() {
             <p className="flex flex-row items-center">
               <Logo />
 
-<<<<<<< HEAD
               <Input
                 placeholder="Untitled Form"
                 size="xl"
@@ -60,7 +59,6 @@ export default function CreateForm() {
               size="lg"
             />
           </div>
-=======
             <span className="mx-4 text-2xl font-poppins text-gray-900">
               {" "}
               Untitled Form
@@ -80,13 +78,11 @@ export default function CreateForm() {
             className="m-2 font-poppins font-medium text-3xl"
             variant="flushed"
           />
->>>>>>> parent of 3c943ce (initial commit)
 
           <button className="font-medium cursor-pointer px-4 py-2 h-full bg-white rounded mx-2 shadow hover:bg-white-700 focus:ring-4">
             Add Question
           </button>
 
-<<<<<<< HEAD
           <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
             <div className="w-full flex justify-center">
               <button className="my-2 mb-4 px-6 py-2 rounded font-mdeium text-white bg-red-600 focus:ring-2 ring-red-300">
@@ -104,7 +100,6 @@ export default function CreateForm() {
                 <MdOutlineImage className="text-white text-2xl" />
               </button>
             </div>
-=======
         <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
           <div className="flex flex-row items-center">
             <Select onChange={(e) => setVal(e.target.value)}>
@@ -114,7 +109,6 @@ export default function CreateForm() {
               </option>
               <option value="mcq">Mutiple Choice</option>
             </Select>
->>>>>>> parent of 3c943ce (initial commit)
 
             {val === "mcq" ? (
               <Multiple onChange={(e) => setMcqQues(e.target.value)} />
@@ -122,11 +116,7 @@ export default function CreateForm() {
               <Text onChange={(e) => setShort(e.target.value)} />
             )}
           </div>
-<<<<<<< HEAD
-=======
-
           {val === "mcq" ? <Multiple /> : <Text />}
->>>>>>> parent of 3c943ce (initial commit)
         </div>
       </div>
     </>
