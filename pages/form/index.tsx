@@ -1,11 +1,8 @@
-import { Header, Logo, Meta } from "../../components";
-import { Short, Heading } from "../../components/form";
-
-import Image from "next/image";
+import { Header, Meta } from "../../components";
+import { Short, Heading, Title } from "../../components/form";
 
 import { useState } from "react";
 
-import { Input } from "@chakra-ui/react";
 import { BiPaperPlane } from "react-icons/bi";
 
 import { auth } from "../../firebase.config";
@@ -14,11 +11,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export default function CreateForm() {
   const [user] = useAuthState(auth);
 
+  let [title, setTitle] = useState("");
   let [heading, setHeading] = useState("");
   let [desc, setDesc] = useState("");
-
   let [short, setShort] = useState("");
-
   let [questions, setQuestions] = useState(["hoi", "wot"]);
 
   const add = () => {
@@ -32,20 +28,7 @@ export default function CreateForm() {
       <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
         <Header />
 
-        <div className="min-w-screen flex justify-center">
-          <header className="px-6 py-5 w-10/12 m-8 bg-white rounded-full flex flex-row items-center">
-            <p className="flex flex-row items-center">
-              <Logo />
-
-              <Input
-                placeholder="Untitled Form"
-                size="xl"
-                variant="flushed"
-                className="mx-4 text-2xl font-medium"
-              />
-            </p>
-          </header>
-        </div>
+        <Title title={title} setTitle={(e: any) => setTitle(e.target.value)} />
 
         <p className="m-4 font-medium text-3xl text-center text-gray-900">
           What will ya create today, {user ? user.displayName : null}?
@@ -57,8 +40,10 @@ export default function CreateForm() {
           </button>
 
           <Heading
-            onHeading={(e: any) => setHeading(e.target.value)}
-            onDesc={(e: any) => setDesc(e.target.value)}
+            heading={heading}
+            desc={desc}
+            setHeading={(e: any) => setHeading(e.target.value)}
+            setDesc={(e: any) => setDesc(e.target.value)}
           />
 
           <button
@@ -75,11 +60,14 @@ export default function CreateForm() {
               </button>
             </div>
 
-            <Short onChange={(e: any) => setShort(e.target.value)} />
+            <Short
+              setShort={(e: any) => setShort(e.target.value)}
+              short={short}
+            />
 
-            {questions.map((q) => (
+            {/* {questions.map((q) => (
               <Short onChange={null} key={null} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

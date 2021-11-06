@@ -1,6 +1,6 @@
 import { Input } from "@chakra-ui/react";
 
-export default function Heading({ onHeading, onDesc }) {
+export default function Heading({ heading, desc, setHeading, setDesc }) {
   return (
     <>
       <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
@@ -9,7 +9,8 @@ export default function Heading({ onHeading, onDesc }) {
           size="xl"
           className="m-2 font-poppins font-medium text-3xl"
           variant="flushed"
-          onChange={onHeading}
+          onChange={setHeading}
+          value={heading}
         />
 
         <Input
@@ -17,7 +18,8 @@ export default function Heading({ onHeading, onDesc }) {
           className="m-2 font-poppins font-medium"
           variant="flushed"
           size="lg"
-          onChange={onDesc}
+          onChange={setDesc}
+          value={desc}
         />
       </div>
     </>

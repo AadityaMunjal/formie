@@ -1,6 +1,6 @@
 import { FormControl, Input } from "@chakra-ui/react";
 
-export default function Short({ onChange }) {
+export default function Short({ short, setShort }) {
   return (
     <>
       <FormControl isRequired>
@@ -9,7 +9,8 @@ export default function Short({ onChange }) {
           className="font-poppins font-medium m-2"
           size="lg"
           variant="flushed"
-          onChange={onChange}
+          onChange={setShort}
+          value={short}
         />
 
         <Input
