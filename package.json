@@ -2,6 +2,7 @@
   "name": "formie",
   "version": "0.1.0",
   "private": true,
+  "author": "anurag",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
