@@ -17,6 +17,12 @@ export default function CreateForm() {
 
   let [short, setShort] = useState("");
 
+  let [questions, setQuestions] = useState(["hoi", "wot"]);
+
+  const add = () => {
+    setQuestions([...questions, ""]);
+  };
+
   return (
     <>
       <Meta title="Formie-Create Form" />
@@ -60,7 +66,10 @@ export default function CreateForm() {
             />
           </div>
 
-          <button className="font-medium cursor-pointer px-4 py-2 h-full bg-white rounded mx-2 shadow hover:bg-white-700 focus:ring-4">
+          <button
+            className="font-medium cursor-pointer px-4 py-2 h-full bg-white rounded mx-2 shadow hover:bg-white-700 focus:ring-4"
+            onClick={add}
+          >
             Add Question
           </button>
 
@@ -78,6 +87,10 @@ export default function CreateForm() {
             </div>
 
             <Short onChange={(e: any) => setShort(e.target.value)} />
+
+            {questions.map((q) => (
+              <Short onChange={null} key={null} />
+            ))}
           </div>
         </div>
       </div>

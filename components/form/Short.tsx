@@ -9,6 +9,7 @@ export default function Short({ onChange }) {
           className="font-poppins font-medium m-2"
           size="lg"
           variant="flushed"
+          onChange={onChange}
         />
 
         <Input
