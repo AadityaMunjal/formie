@@ -16,7 +16,7 @@ export default function Home() {
             Your go-to solution to make awesome forms!!
           </p>
 
-          <Link href="/components/auth/Socials">
+          <Link href="/auth" passHref>
             <button className="flex flex-row justify-center items-center m-6 bg-white p-2 px-2 rounded-lg shadow font-poppins font-medium text-xl sm:p-3 sm:px-6 hover:shadow-xl">
               Sign Up <BsArrowRightShort size="30" />
             </button>

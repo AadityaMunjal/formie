@@ -1,4 +1,4 @@
-import { auth } from "../../firebase.config";
+import { auth } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Stack, Switch } from "@chakra-ui/react";
@@ -23,16 +23,17 @@ export default function Header() {
       <ul className="text-gray-900 font-medium flex flex-row items-center text-xl">
         <Li text="Home" url="/" />
 
-        <Li text="Account" url="/components/Account" />
+        <Li text="Account" url="/account" />
       </ul>
       <p className="flex flex-row items-center">
         {user ? (
-          <Link href="/components/Account">
+          <Link href="/components/Account" passHref>
             <Image
               src={user.photoURL}
               className="w-14 h-14 rounded-full cursor-pointer hover:shadow-xl"
               width={50}
               height={50}
+              alt="user"
             />
           </Link>
         ) : null}
