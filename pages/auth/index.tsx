@@ -1,6 +1,6 @@
 import { Socials } from "../../components/auth";
 
-import { Account, Meta, Header } from '../../components'
+import { Account, Meta, Header } from "../../components";
 
 import { auth } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
