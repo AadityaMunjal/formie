@@ -1,7 +1,6 @@
 import Home from "./Home";
 
-import Meta from "../components/Meta";
-import Header from "../components/Header";
+import { Meta, Header } from "../components";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase.config";

@@ -1,13 +1,11 @@
-import Header from "../../components/Header";
+import { Header, Logo, Meta } from "../../components";
 import Short from "../../components/form/Short";
 
 import Image from "next/image";
-import Logo from "../../components/Logo";
-import Meta from "../../components/Meta";
 
 import { useState } from "react";
 
-import { Input, Select } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import { MdOutlineImage } from "react-icons/md";
 import { BiPaperPlane } from "react-icons/bi";
 

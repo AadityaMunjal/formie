@@ -1,10 +1,9 @@
 import { auth } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import Header from "./Header";
+import { Header, Meta } from "./";
 import Link from "next/link";
-import Meta from "./Meta";
-import Socials from "./auth/Socials";
+import { Socials } from "./auth";
 
 export default function Account() {
   const [user] = useAuthState(auth);

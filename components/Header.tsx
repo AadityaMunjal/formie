@@ -5,7 +5,7 @@ import { Stack, Switch } from "@chakra-ui/react";
 
 import Link from "next/link";
 import Image from "next/image";
-import SignOut from "./auth/Sign-Out";
+import { SignOut } from "./auth";
 
 export default function Header() {
   const [user] = useAuthState(auth);
