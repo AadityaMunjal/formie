@@ -4,6 +4,7 @@ import { Short, Heading, Title } from "../../components/form";
 import { useState } from "react";
 
 import { BiPaperPlane } from "react-icons/bi";
+import { Input } from "@chakra-ui/react";
 
 import { auth } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -11,14 +12,33 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export default function CreateForm() {
   const [user] = useAuthState(auth);
 
+  let [val, setVal] = useState("");
+
   let [title, setTitle] = useState("");
   let [heading, setHeading] = useState("");
   let [desc, setDesc] = useState("");
-  let [short, setShort] = useState("");
-  let [questions, setQuestions] = useState(["hoi", "wot"]);
+  let [questions, setQuestions] = useState([]);
 
   const add = () => {
-    setQuestions([...questions, ""]);
+    val === ""
+      ? null
+      : setQuestions([
+          ...questions,
+          {
+            text: val,
+            id: questions.length + 1,
+          },
+        ]);
+
+    setVal("");
+  };
+
+  const dlt = (id: any) => {
+    const removeQues = questions.filter((todo) => {
+      return todo.id !== id;
+    });
+
+    setQuestions(removeQues);
   };
 
   return (
@@ -46,28 +66,27 @@ export default function CreateForm() {
             setDesc={(e: any) => setDesc(e.target.value)}
           />
 
-          <button
-            className="font-medium cursor-pointer px-4 py-2 h-full bg-white rounded mx-2 shadow hover:bg-white-700 focus:ring-4"
-            onClick={add}
-          >
-            Add Question
-          </button>
-
           <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
-            <div className="w-full flex justify-center">
-              <button className="my-2 mb-4 px-6 py-2 rounded font-mdeium text-white bg-red-600 focus:ring-2 ring-red-300">
-                Delete
+            <Input
+              variant="flushed"
+              placeholder="Question goes here!"
+              size="lg"
+              onChange={(e: any) => setVal(e.target.value)}
+              className="font-medium m-2"
+            />
+
+            <div className="w-full flex justify-center ">
+              <button
+                className="my-2 mx-6 p-3 px-5 bg-purple-600 rounded font-poppins font-medium text-xl text-white focus:ring-4 ring-purple-400 cursor-pointer hover:bg-purple-500 transition-all duration-4"
+                onClick={add}
+              >
+                Add
               </button>
             </div>
 
-            <Short
-              setShort={(e: any) => setShort(e.target.value)}
-              short={short}
-            />
-
-            {/* {questions.map((q) => (
-              <Short onChange={null} key={null} />
-            ))} */}
+            {questions.map((q) => (
+              <Short short={q.text} key={null} />
+            ))}
           </div>
         </div>
       </div>
