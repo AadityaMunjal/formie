@@ -84,11 +84,10 @@ export default function CreateForm() {
                 Add
               </button>
             </div>
-
-            {questions.map((q) => (
-              <Short short={q.text} key={q.id} dlt={() => dlt(q.id)} />
-            ))}
           </div>
+          {questions.map((q) => (
+            <Short short={q.text} key={q.id} dlt={() => dlt(q.id)} />
+          ))}
         </div>
       </div>
     </>
