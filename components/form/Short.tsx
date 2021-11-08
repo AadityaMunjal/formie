@@ -1,12 +1,12 @@
 import { FormControl, Input } from "@chakra-ui/react";
 
-export default function Short({ short }) {
+export default function Short({ short, dlt }) {
   return (
     <>
       <div className="w-full flex justify-center">
         <button
           className="my-2 mb-4 px-6 py-2 rounded font-medium text-white bg-red-600 focus:ring-2 ring-red-300"
-          onClick={null}
+          onClick={dlt}
         >
           Delete
         </button>

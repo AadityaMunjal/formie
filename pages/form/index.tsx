@@ -73,6 +73,7 @@ export default function CreateForm() {
               size="lg"
               onChange={(e: any) => setVal(e.target.value)}
               className="font-medium m-2"
+              value={val}
             />
 
             <div className="w-full flex justify-center ">
@@ -85,7 +86,7 @@ export default function CreateForm() {
             </div>
 
             {questions.map((q) => (
-              <Short short={q.text} key={null} />
+              <Short short={q.text} key={q.id} dlt={() => dlt(q.id)} />
             ))}
           </div>
         </div>
