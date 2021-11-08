@@ -66,13 +66,14 @@ export default function CreateForm() {
             setDesc={(e: any) => setDesc(e.target.value)}
           />
 
-          <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
+          <div className="m-6 w-6/12 px-8 py-4 bg-white rounded">
             <Input
               variant="flushed"
               placeholder="Question goes here!"
               size="lg"
               onChange={(e: any) => setVal(e.target.value)}
               className="font-medium m-2"
+              value={val}
             />
 
             <div className="w-full flex justify-center ">
@@ -83,11 +84,10 @@ export default function CreateForm() {
                 Add
               </button>
             </div>
-
-            {questions.map((q) => (
-              <Short short={q.text} key={null} />
-            ))}
           </div>
+          {questions.map((q) => (
+            <Short short={q.text} key={q.id} dlt={() => dlt(q.id)} />
+          ))}
         </div>
       </div>
     </>
