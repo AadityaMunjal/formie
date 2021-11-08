@@ -66,7 +66,7 @@ export default function CreateForm() {
             setDesc={(e: any) => setDesc(e.target.value)}
           />
 
-          <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
+          <div className="m-6 w-6/12 px-8 py-4 bg-white rounded">
             <Input
               variant="flushed"
               placeholder="Question goes here!"
