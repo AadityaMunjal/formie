@@ -1,16 +1,40 @@
 import { Header, Meta } from "../../components";
 import { Short, Heading, Title } from "../../components/form";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { BiPaperPlane } from "react-icons/bi";
 import { Input } from "@chakra-ui/react";
 
-import { auth } from "../../firebase.config";
+import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
+
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from "@firebase/firestore";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
+
+  // storing user's metadata
+  useEffect(() => {
+    async function addUser() {
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        pfp: user.photoURL,
+        uid: user.uid,
+        forms: [],
+      });
+    }
+
+    addUser();
+  }, [user]);
 
   let [val, setVal] = useState("");
 
@@ -41,6 +65,21 @@ export default function CreateForm() {
     setQuestions(removeQues);
   };
 
+  const send = async () => {
+    const form = {
+      title: title,
+      heading: heading,
+      desc: desc,
+      questions: questions,
+    };
+
+    let ref = doc(db, "users", user.uid);
+
+    await updateDoc(ref, {
+      forms: arrayUnion(form),
+    });
+  };
+
   return (
     <>
       <Meta title="Formie-Create Form" />
@@ -55,7 +94,10 @@ export default function CreateForm() {
         </p>
 
         <div className="w-full grid justify-items-center">
-          <button className="flex flex-row justify-center items-center p-3 px-5 rounded-md bg-purple-600 text-white text-xl focus:ring-4 ring-purple-300">
+          <button
+            className="flex flex-row justify-center items-center p-3 px-5 rounded-md bg-purple-600 text-white text-xl focus:ring-4 ring-purple-300"
+            onClick={send}
+          >
             Send <BiPaperPlane size={25} className="mx-2" />
           </button>
 

@@ -27,7 +27,7 @@ export default function Header() {
       </ul>
       <p className="flex flex-row items-center">
         {user ? (
-          <Link href="/components/Account" passHref>
+          <Link href="/account" passHref>
             <Image
               src={user.photoURL}
               className="w-14 h-14 rounded-full cursor-pointer hover:shadow-xl"
