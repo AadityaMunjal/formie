@@ -30,7 +30,7 @@ export default function CreateForm() {
         pfp: user.photoURL,
         uid: user.uid,
         forms: [],
-      });
+      }, {merge: true});
     }
 
     addUser();
@@ -77,7 +77,7 @@ export default function CreateForm() {
 
     await updateDoc(ref, {
       forms: arrayUnion(form),
-    }, {merge: true});
+    });
   };
 
   return (
