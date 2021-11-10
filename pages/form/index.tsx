@@ -29,7 +29,6 @@ export default function CreateForm() {
         name: user.displayName,
         pfp: user.photoURL,
         uid: user.uid,
-        forms: [],
       }, {merge: true});
     }
 
