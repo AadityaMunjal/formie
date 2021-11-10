@@ -77,7 +77,7 @@ export default function CreateForm() {
 
     await updateDoc(ref, {
       forms: arrayUnion(form),
-    });
+    }, {merge: true});
   };
 
   return (
