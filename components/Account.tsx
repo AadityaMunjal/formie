@@ -17,7 +17,7 @@ export default function Account() {
         <div>
           <div className="flex flex-row w-screen justify-center items-center">
             {user ? (
-              <p className="text-center m-1 text-3xl text-secondary font-semibold">
+              <p className="text-center m-1 text-3xl text-secondary font-medium">
                 {" "}
                 Hoi, {user.displayName}{" "}
               </p>
