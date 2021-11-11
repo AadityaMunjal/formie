@@ -33,6 +33,11 @@ export default function CreateForm() {
         },
         { merge: true }
       );
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        pfp: user.photoURL,
+        uid: user.uid,
+      }, {merge: true});
     }
 
     addUser();

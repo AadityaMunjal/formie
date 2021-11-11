@@ -23,7 +23,7 @@ export default function Account() {
               </p>
             ) : null}
 
-            <Link href="/components/form" passHref>
+            <Link href="/form" passHref>
               <button className="mx-6 rounded-lg m-4 p-3 px-5 font-medium text-white text-xl focus:ring-4 duration-200 bg-indigo-500">
                 Create Form
               </button>
