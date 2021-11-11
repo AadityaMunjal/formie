@@ -11,6 +11,7 @@ export default function Heading({ heading, desc, setHeading, setDesc }) {
           variant="flushed"
           onChange={setHeading}
           value={heading}
+          isRequired
         />
 
         <Input
@@ -20,6 +21,7 @@ export default function Heading({ heading, desc, setHeading, setDesc }) {
           size="lg"
           onChange={setDesc}
           value={desc}
+          isRequired
         />
       </div>
     </>

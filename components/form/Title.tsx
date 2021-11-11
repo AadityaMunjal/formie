@@ -16,6 +16,7 @@ export default function Title({ setTitle, title }) {
               className="mx-4 text-2xl font-medium"
               value={title}
               onChange={setTitle}
+              isRequired
             />
           </p>
         </header>

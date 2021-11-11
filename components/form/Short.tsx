@@ -19,6 +19,7 @@ export default function Short({ short, dlt }) {
           size="lg"
           variant="flushed"
           value={short}
+          isDisabled
         />
 
         <Input

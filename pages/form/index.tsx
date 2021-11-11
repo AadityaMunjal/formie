@@ -1,6 +1,7 @@
 import { Header, Meta } from "../../components";
 import { Short, Heading, Title } from "../../components/form";
 
+import { toast, Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 
 import { BiPaperPlane } from "react-icons/bi";
@@ -9,15 +10,7 @@ import { Input } from "@chakra-ui/react";
 import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-  updateDoc,
-  arrayRemove,
-  arrayUnion,
-} from "@firebase/firestore";
+import { setDoc, doc, updateDoc, arrayUnion } from "@firebase/firestore";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
@@ -25,6 +18,15 @@ export default function CreateForm() {
   // storing user's metadata
   useEffect(() => {
     async function addUser() {
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          name: user.displayName,
+          pfp: user.photoURL,
+          uid: user.uid,
+        },
+        { merge: true }
+      );
       await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
         pfp: user.photoURL,
@@ -54,6 +56,7 @@ export default function CreateForm() {
         ]);
 
     setVal("");
+    toast.success("Question added");
   };
 
   const dlt = (id: any) => {
@@ -62,25 +65,42 @@ export default function CreateForm() {
     });
 
     setQuestions(removeQues);
+    toast.error("Question deleted");
   };
 
   const send = async () => {
-    const form = {
-      title: title,
-      heading: heading,
-      desc: desc,
-      questions: questions,
-    };
+    if (
+      title === "" ||
+      heading === "" ||
+      desc === "" ||
+      questions.length === 0
+    ) {
+      console.log("empty");
+      toast.error("Please fill all the fields");
+    } else {
+      const form = {
+        title: title,
+        heading: heading,
+        desc: desc,
+        questions: questions,
+      };
 
-    let ref = doc(db, "users", user.uid);
+      await updateDoc(doc(db, "users", user.uid), {
+        forms: arrayUnion(form),
+      });
 
-    await updateDoc(ref, {
-      forms: arrayUnion(form),
-    });
+      setTitle("");
+      setHeading("");
+      setDesc("");
+      setQuestions([]);
+
+      toast.success("Form created successfully");
+    }
   };
 
   return (
     <>
+      <Toaster />
       <Meta title="Formie-Create Form" />
 
       <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
@@ -115,6 +135,7 @@ export default function CreateForm() {
               onChange={(e: any) => setVal(e.target.value)}
               className="font-medium m-2"
               value={val}
+              isRequired
             />
 
             <div className="w-full flex justify-center ">
