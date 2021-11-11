@@ -1,7 +1,7 @@
 import { Header, Meta } from "../../components";
 import { Short, Heading, Title } from "../../components/form";
 
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 
 import { BiPaperPlane } from "react-icons/bi";
@@ -18,12 +18,15 @@ export default function CreateForm() {
   // storing user's metadata
   useEffect(() => {
     async function addUser() {
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        pfp: user.photoURL,
-        uid: user.uid,
-        forms: [],
-      });
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          name: user.displayName,
+          pfp: user.photoURL,
+          uid: user.uid,
+        },
+        { merge: true }
+      );
     }
 
     addUser();
@@ -92,6 +95,7 @@ export default function CreateForm() {
 
   return (
     <>
+      <Toaster />
       <Meta title="Formie-Create Form" />
 
       <div className="min-h-screen min-w-screen bg-grey font-poppins font-medium">
