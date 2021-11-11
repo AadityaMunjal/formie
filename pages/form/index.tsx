@@ -10,7 +10,13 @@ import { Input } from "@chakra-ui/react";
 import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { setDoc, doc, updateDoc, arrayUnion } from "@firebase/firestore";
+import {
+  setDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  serverTimestamp,
+} from "@firebase/firestore";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
@@ -78,6 +84,7 @@ export default function CreateForm() {
         heading: heading,
         desc: desc,
         questions: questions,
+        createdAt: serverTimestamp(),
       };
 
       await updateDoc(doc(db, "users", user.uid), {
