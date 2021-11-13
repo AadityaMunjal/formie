@@ -1,9 +1,10 @@
-import { Input } from "@chakra-ui/react";
+import { Input, FormLabel } from "@chakra-ui/react";
 
 export default function Heading({ heading, desc, setHeading, setDesc }) {
   return (
     <>
       <div className="m-6 w-6/12 px-8 py-6 bg-white rounded">
+   
         <Input
           placeholder="Heading goes brr..."
           size="xl"

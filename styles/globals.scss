@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 .circle {
   border: solid 2em #fff;
 }
@@ -12,16 +16,16 @@ body {
   overflow-x: hidden;
   background: #f7f7f7;
 
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 0.5rem;
+  // }
 
-  &::-webkit-scrollbar-track {
-    background: #000;
-  }
+  // &::-webkit-scrollbar-track {
+  //   background: #000;
+  // }
 
-  &::-webkit-scrollbar-thumb {
-    @apply bg-white;
-    border-radius: 1rem;
-  }
+  // &::-webkit-scrollbar-thumb {
+  //   @apply bg-white;
+  //   border-radius: 1rem;
+  // }
 }
