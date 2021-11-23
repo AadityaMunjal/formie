@@ -10,7 +10,7 @@ import { Title, Short } from "../../../components/client";
 function Form() {
   const router = useRouter();
   let { uid, id } = router.query;
-  
+
   let [title, setTitle] = useState("");
   let [heading, setHeading] = useState();
   let [desc, setDesc] = useState("");

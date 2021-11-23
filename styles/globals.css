@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .circle {
