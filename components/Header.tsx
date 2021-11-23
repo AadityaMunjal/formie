@@ -23,11 +23,11 @@ export default function Header() {
       <ul className="text-gray-900 font-medium flex flex-row items-center text-xl">
         <Li text="Home" url="/" />
 
-        <Li text="Account" url="/account" />
+        <Li text="Account" url="/dashboard" />
       </ul>
       <p className="flex flex-row items-center">
         {user ? (
-          <Link href="/account" passHref>
+          <Link href="/dashboard" passHref>
             <Image
               src={user.photoURL}
               className="w-14 h-14 rounded-full cursor-pointer hover:shadow-xl"

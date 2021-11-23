@@ -15,6 +15,6 @@
     "incremental": true,
     "module": "esnext"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/form/[uid]/[id].jsx"],
   "exclude": ["node_modules"]
 }

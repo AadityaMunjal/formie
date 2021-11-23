@@ -16,6 +16,7 @@ import {
   updateDoc,
   arrayUnion,
   serverTimestamp,
+  getDoc,
 } from "@firebase/firestore";
 
 export default function CreateForm() {
@@ -33,11 +34,6 @@ export default function CreateForm() {
         },
         { merge: true }
       );
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        pfp: user.photoURL,
-        uid: user.uid,
-      }, {merge: true});
     }
 
     addUser();
@@ -49,6 +45,8 @@ export default function CreateForm() {
   let [heading, setHeading] = useState("");
   let [desc, setDesc] = useState("");
   let [questions, setQuestions] = useState([]);
+
+  let [data, setData] = useState<any>();
 
   const add = () => {
     val === ""
@@ -75,6 +73,13 @@ export default function CreateForm() {
   };
 
   const send = async () => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      docSnap ? setData(docSnap.data().forms) : setData(null);
+    
+
     if (
       title === "" ||
       heading === "" ||
@@ -85,23 +90,32 @@ export default function CreateForm() {
       toast.error("Please fill all the fields");
     } else {
       const form = {
+        id: data ? data.length() + 1 : 1,
         title: title,
         heading: heading,
         desc: desc,
         questions: questions,
-        createdAt: serverTimestamp(),
       };
-
+      
+      if (docSnap) {
       await updateDoc(doc(db, "users", user.uid), {
         forms: arrayUnion(form),
       });
-
+    }
+    else {
+      await setDoc(doc(db, "users", user.uid), {
+        forms: arrayUnion(form),
+      });
+    }
       setTitle("");
       setHeading("");
       setDesc("");
       setQuestions([]);
 
       toast.success("Form created successfully");
+
+      console.log(`/form/${user.uid}/${form.id}`);
+    }
     }
   };
 
