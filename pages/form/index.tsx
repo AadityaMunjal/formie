@@ -78,7 +78,7 @@ export default function CreateForm() {
       const docSnap = await getDoc(docRef);
 
       docSnap ? setData(docSnap.data().forms) : setData(null);
-    }
+    
 
     if (
       title === "" ||
@@ -95,13 +95,18 @@ export default function CreateForm() {
         heading: heading,
         desc: desc,
         questions: questions,
-        createdAt: serverTimestamp(),
       };
-
+      
+      if (docSnap) {
       await updateDoc(doc(db, "users", user.uid), {
         forms: arrayUnion(form),
       });
-
+    }
+    else {
+      await setDoc(doc(db, "users", user.uid), {
+        forms: arrayUnion(form),
+      });
+    }
       setTitle("");
       setHeading("");
       setDesc("");
@@ -110,6 +115,7 @@ export default function CreateForm() {
       toast.success("Form created successfully");
 
       console.log(`/form/${user.uid}/${form.id}`);
+    }
     }
   };
 
