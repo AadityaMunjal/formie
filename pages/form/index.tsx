@@ -78,44 +78,42 @@ export default function CreateForm() {
       const docSnap = await getDoc(docRef);
 
       docSnap ? setData(docSnap.data().forms) : setData(null);
-    
 
-    if (
-      title === "" ||
-      heading === "" ||
-      desc === "" ||
-      questions.length === 0
-    ) {
-      console.log("empty");
-      toast.error("Please fill all the fields");
-    } else {
-      const form = {
-        id: data ? data.length() + 1 : 1,
-        title: title,
-        heading: heading,
-        desc: desc,
-        questions: questions,
-      };
-      
-      if (docSnap) {
-      await updateDoc(doc(db, "users", user.uid), {
-        forms: arrayUnion(form),
-      });
-    }
-    else {
-      await setDoc(doc(db, "users", user.uid), {
-        forms: arrayUnion(form),
-      });
-    }
-      setTitle("");
-      setHeading("");
-      setDesc("");
-      setQuestions([]);
+      if (
+        title === "" ||
+        heading === "" ||
+        desc === "" ||
+        questions.length === 0
+      ) {
+        console.log("empty");
+        toast.error("Please fill all the fields");
+      } else {
+        const form = {
+          id: data ? data.length() + 1 : 1,
+          title: title,
+          heading: heading,
+          desc: desc,
+          questions: questions,
+        };
 
-      toast.success("Form created successfully");
+        if (docSnap) {
+          await updateDoc(doc(db, "users", user.uid), {
+            forms: arrayUnion(form),
+          });
+        } else {
+          await setDoc(doc(db, "users", user.uid), {
+            forms: arrayUnion(form),
+          });
+        }
+        setTitle("");
+        setHeading("");
+        setDesc("");
+        setQuestions([]);
 
-      console.log(`/form/${user.uid}/${form.id}`);
-    }
+        toast.success("Form created successfully");
+
+        console.log(`/form/${user.uid}/${form.id}`);
+      }
     }
   };
 

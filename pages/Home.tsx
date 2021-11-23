@@ -6,7 +6,7 @@ import { Header } from "../components";
 export default function Home() {
   return (
     <>
-    <Header />
+      <Header />
       <div className="min-h-screen w-full p-2 bg-primary font-poppins">
         <div className="m-8 h-8 w-8 rounded-full bg-yellow"></div>
         <p className="m-4 sm:m-6 md:m-10 xl:m-16">

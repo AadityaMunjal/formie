@@ -59,7 +59,7 @@ export default function Dashboard() {
           </div>
 
           <div className="flex flex-row w-screen justify-center items-center">
-           {/* {
+            {/* {
              data.map(form=>(
                <p key={form.title}>{form.title}</p>
              ))
