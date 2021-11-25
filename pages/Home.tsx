@@ -1,9 +1,10 @@
+import type { NextPage } from "next";
 import { BsArrowRightShort } from "react-icons/bs";
 
 import Link from "next/link";
 import { Header } from "../components";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Header />
@@ -29,4 +30,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Home;

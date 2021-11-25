@@ -63,6 +63,12 @@ export default function CreateForm() {
     toast.success("Question added");
   };
 
+  const submitOnEnter = (e: any) => {
+    if (e.key === "Enter") {
+      add();
+    }
+  };
+
   const dlt = (id: any) => {
     const removeQues = questions.filter((todo) => {
       return todo.id !== id;
@@ -155,6 +161,7 @@ export default function CreateForm() {
               className="font-medium m-2"
               value={val}
               isRequired
+              onKeyDown={(e) => submitOnEnter(e)}
             />
 
             <div className="w-full flex justify-center ">
