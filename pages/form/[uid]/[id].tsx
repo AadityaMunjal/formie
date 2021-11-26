@@ -1,26 +1,28 @@
+import type { NextPage } from "next";
+import type { answers, questions } from "../../../types/form";
 import { useRouter } from "next/router";
 
 import { getDoc, doc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 import { db } from "../../../firebase.config";
 
 import { Title, Short } from "../../../components/client";
 import { Heading } from "../../../components/form";
 
-function Form() {
+const Form: NextPage = () => {
   const router = useRouter();
   let { uid, id } = router.query;
 
-  let [title, setTitle] = useState("");
-  let [heading, setHeading] = useState();
-  let [desc, setDesc] = useState("");
-  let [questions, setQuestions] = useState([]);
+  let [title, setTitle] = useState<string>();
+  let [heading, setHeading] = useState<string>();
+  let [desc, setDesc] = useState<string>();
+  let [questions, setQuestions] = useState<questions[]>();
 
-  let [answers, setAnswers] = useState([{ id: Number, val: String }]);
+  let [answers, setAnswers] = useState<answers[]>();
   console.log(answers);
 
-  const set = (id, e) => {
+  const set = (id: Number, e: any) => {
     answers.map((answer) => {
       if (answer.id === id) {
         answer.val = e.target.value;
@@ -30,13 +32,11 @@ function Form() {
 
   useEffect(() => {
     async function getData() {
-      const ref = doc(db, "users", uid);
+      const ref = doc(db, "users", uid as string);
       const docSnap = await getDoc(ref);
 
-      docSnap ? console.log(docSnap.data()) : console.log("no data");
-
-      console.log(docSnap.data().forms[id]);
-      let form = docSnap.data().forms[id];
+      // docSnap ? console.log(docSnap.data()) : console.log("no data");
+      let form = docSnap.data().forms[id as string];
 
       setTitle(form.title);
       setQuestions(form.questions);
@@ -53,7 +53,7 @@ function Form() {
     }
 
     getData();
-  }, [id, uid]);
+  }, [id, uid, answers, questions]);
 
   return (
     <div>
@@ -69,12 +69,12 @@ function Form() {
         <Short
           key={question.id}
           question={question.text}
-          onChange={(e) => set(question.id, e)}
+          onChange={(e: ChangeEvent) => set(question.id, e)}
         />
       ))}
     </div>
   );
-}
+};
 
 export default Form;
 

@@ -10,6 +10,8 @@ import { Input } from "@chakra-ui/react";
 import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+import type { questions } from "../../types/form";
+
 import {
   setDoc,
   doc,
@@ -44,7 +46,7 @@ export default function CreateForm() {
   let [title, setTitle] = useState("");
   let [heading, setHeading] = useState("");
   let [desc, setDesc] = useState("");
-  let [questions, setQuestions] = useState([]);
+  let [questions, setQuestions] = useState<questions[]>();
 
   let [data, setData] = useState<any>();
 
