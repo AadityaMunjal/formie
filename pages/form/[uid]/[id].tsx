@@ -10,7 +10,7 @@ import { db } from "../../../firebase.config";
 import { Title, Short } from "../../../components/client";
 import { Heading } from "../../../components/form";
 
-const Form: NextPage = () => {
+function Form() {
   const router = useRouter();
   let { uid, id } = router.query;
 
@@ -32,26 +32,27 @@ const Form: NextPage = () => {
 
   useEffect(() => {
     async function getData() {
-      const ref = doc(db, "users", uid as string);
-      const docSnap = await getDoc(ref);
+      if (uid && id) {
+        const ref = doc(db, "users", uid as string);
+        const docSnap = await getDoc(ref);
 
-      // docSnap ? console.log(docSnap.data()) : console.log("no data");
-      let form = docSnap.data().forms[id as string];
+        // docSnap ? console.log(docSnap.data()) : console.log("no data");
+        let form = docSnap.data().forms[id as string];
 
-      setTitle(form.title);
-      setQuestions(form.questions);
+        setTitle(form.title);
+        setQuestions(form.questions);
 
-      questions.map((q) => {
-        setAnswers([
-          ...answers,
-          {
-            id: q.id,
-            val: "",
-          },
-        ]);
-      });
+        questions.map((q) => {
+          setAnswers([
+            ...answers,
+            {
+              id: q.id,
+              val: "",
+            },
+          ]);
+        });
+      }
     }
-
     getData();
   }, [id, uid, answers, questions]);
 
@@ -74,7 +75,21 @@ const Form: NextPage = () => {
       ))}
     </div>
   );
-};
+}
+
+// export async function getStaticProps() {
+//   const ref = doc(db, "users", uid as string);
+//   const docSnap = await getDoc(ref);
+
+//   // docSnap ? console.log(docSnap.data()) : console.log("no data");
+//   let form = docSnap.data().forms[id as string];
+
+//   return {
+//     props: {
+//       form,
+//     },
+//   };
+// }
 
 export default Form;
 
