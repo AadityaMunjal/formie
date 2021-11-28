@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { auth } from "../../firebase.config";
 import {
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
   GithubAuthProvider,
 } from "firebase/auth";
 
@@ -12,28 +12,28 @@ export default function Socials() {
   const signIn = () => {
     const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider);
+    signInWithRedirect(auth, provider);
   };
 
   const signInWithGithub = () => {
     const provider = new GithubAuthProvider();
 
-    signInWithPopup(auth, provider);
+    signInWithRedirect(auth, provider);
   };
 
   return (
     <>
-      <div className="font-poppins h-screen w-screen flex flex-col justify-center items-center">
-        <div className="py-10 px-4 shadow-xl rounded">
+      <div className="flex flex-col items-center justify-center w-screen h-screen font-poppins">
+        <div className="px-4 py-10 rounded shadow-xl">
           <button
-            className="m-2 p-3 rounded shadow flex flex-row bg-black text-white font-medium items-center justify-center hover:bg-white hover:text-black hover:shadow-xl"
+            className="flex flex-row items-center justify-center p-3 m-2 font-medium text-white bg-black rounded shadow hover:bg-white hover:text-black hover:shadow-xl"
             onClick={signIn}
           >
             <FcGoogle size="25" className="mx-2" /> Sign in with Google
           </button>
 
           <button
-            className="m-2 p-3 rounded shadow flex flex-row bg-black text-white font-medium items-center justify-center hover:bg-white hover:text-black hover:shadow-xl"
+            className="flex flex-row items-center justify-center p-3 m-2 font-medium text-white bg-black rounded shadow hover:bg-white hover:text-black hover:shadow-xl"
             onClick={signInWithGithub}
           >
             <AiFillGithub size="25" className="mx-2" /> Sign in with GitHub
