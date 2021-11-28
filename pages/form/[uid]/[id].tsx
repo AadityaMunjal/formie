@@ -11,8 +11,8 @@ import { Title, Short } from "../../../components/client";
 import { Heading } from "../../../components/form";
 
 function Form() {
-  const router = useRouter();
-  let { uid, id } = router.query;
+  // const router = useRouter();
+  // let { uid, id } = router.query;
 
   let [title, setTitle] = useState<string>();
   let [heading, setHeading] = useState<string>();
@@ -30,31 +30,31 @@ function Form() {
     });
   };
 
-  useEffect(() => {
-    async function getData() {
-      if (uid && id) {
-        const ref = doc(db, "users", uid as string);
-        const docSnap = await getDoc(ref);
+  // useEffect(() => {
+  //   async function getData() {
+  //     if (uid && id) {
+  //       const ref = doc(db, "users", uid as string);
+  //       const docSnap = await getDoc(ref);
 
-        // docSnap ? console.log(docSnap.data()) : console.log("no data");
-        let form = docSnap.data().forms[id as string];
+  //       // docSnap ? console.log(docSnap.data()) : console.log("no data");
+  //       let form = docSnap.data().forms[id as string];
 
-        setTitle(form.title);
-        setQuestions(form.questions);
+  //       setTitle(form.title);
+  //       setQuestions(form.questions);
 
-        questions.map((q) => {
-          setAnswers([
-            ...answers,
-            {
-              id: q.id,
-              val: "",
-            },
-          ]);
-        });
-      }
-    }
-    getData();
-  }, [id, uid, answers, questions]);
+  //       questions.map((q) => {
+  //         setAnswers([
+  //           ...answers,
+  //           {
+  //             id: q.id,
+  //             val: "",
+  //           },
+  //         ]);
+  //       });
+  //     }
+  //   }
+  //   getData();
+  // }, [id, uid, answers, questions]);
 
   return (
     <div>
@@ -65,7 +65,6 @@ function Form() {
           {title}
         </p>
       </div>
-      <button onClick={() => console.log(answers)}>click me</button>
       {questions.map((question) => (
         <Short
           key={question.id}
