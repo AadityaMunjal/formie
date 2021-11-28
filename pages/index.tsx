@@ -1,9 +1,10 @@
 import Home from "./Home";
+import type { NextPage } from "next";
 
 import { Meta } from "../components";
 import { Toaster } from "react-hot-toast";
 
-export default function App() {
+const App: NextPage = () => {
   return (
     <>
       <Meta />
@@ -11,4 +12,6 @@ export default function App() {
       <Home />
     </>
   );
-}
+};
+
+export default App;

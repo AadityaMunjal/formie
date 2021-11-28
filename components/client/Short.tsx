@@ -6,8 +6,9 @@ export default function Short({ question, onChange }) {
       <p>{question}</p>
       <Input
         placeholder="Your answer here..."
-        // value={value}
         onChange={onChange}
+        variant="flushed"
+        size="md"
       />
     </div>
   );

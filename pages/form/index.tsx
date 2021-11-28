@@ -10,6 +10,8 @@ import { Input } from "@chakra-ui/react";
 import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+import type { questions } from "../../types/form";
+
 import {
   setDoc,
   doc,
@@ -44,7 +46,7 @@ export default function CreateForm() {
   let [title, setTitle] = useState("");
   let [heading, setHeading] = useState("");
   let [desc, setDesc] = useState("");
-  let [questions, setQuestions] = useState([]);
+  let [questions, setQuestions] = useState<questions[]>();
 
   let [data, setData] = useState<any>();
 
@@ -61,6 +63,12 @@ export default function CreateForm() {
 
     setVal("");
     toast.success("Question added");
+  };
+
+  const submitOnEnter = (e: any) => {
+    if (e.key === "Enter") {
+      add();
+    }
   };
 
   const dlt = (id: any) => {
@@ -155,6 +163,7 @@ export default function CreateForm() {
               className="font-medium m-2"
               value={val}
               isRequired
+              onKeyDown={(e) => submitOnEnter(e)}
             />
 
             <div className="w-full flex justify-center ">
