@@ -40,9 +40,9 @@ export default function Header() {
 
         {user ? <SignOut /> : null}
 
-        <Stack align="center" direction="row">
+        {/* <Stack align="center" direction="row">
           <Switch size="lg" className="mx-4" colorScheme="blackAlpha" />
-        </Stack>
+        </Stack> */}
       </p>
     </header>
   );
