@@ -65,13 +65,13 @@ function Form() {
           {title}
         </p>
       </div>
-      {questions.map((question) => (
+      {/* {questions.map((question) => (
         <Short
           key={question.id}
           question={question.text}
           onChange={(e: ChangeEvent) => set(question.id, e)}
         />
-      ))}
+      ))} */}
     </div>
   );
 }
