@@ -7,6 +7,7 @@ import { db } from "../../../firebase.config";
 
 import { Title, Short } from "../../../components/client";
 import type { question, answer } from '../../../types/index'
+import { Header } from '../../../components'
 
 function Form() {
   const router = useRouter();
@@ -42,6 +43,8 @@ function Form() {
   }, [id, uid]);
 
   return (
+    <>
+    <Header />
     <div>
       <Title title="sup" />
       <h1>{`/${uid}/${id}`}</h1>
@@ -54,6 +57,7 @@ function Form() {
         />
       )) : null}
     </div>
+    </>
   );
 }
 
