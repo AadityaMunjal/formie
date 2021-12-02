@@ -1,6 +1,6 @@
 interface question {
     id: number,
-    val: string
+    text: string
 }
 
 interface answer {
