@@ -28,14 +28,14 @@ function Form() {
       },
     ]);
   };
-
+ console.log(questions);
+ 
   useEffect(() => {
     async function getData() {
       const ref = doc(db, "users", uid as string);
       const docSnap = await getDoc(ref);
 
-      console.log(docSnap.data());
-      console.log(docSnap.data().forms[id as string]);
+      setQuestions(docSnap.data().forms[id as string].questions)
     }
 
     getData();
@@ -49,7 +49,7 @@ function Form() {
       {questions ? questions.map((question) => (
         <Short
           key={question.id}
-          question={question.val}
+          question={question.text}
           onChange={(e) => set(question.id, e)}
         />
       )) : null}
