@@ -3,16 +3,24 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Header, Meta } from ".";
 import Link from "next/link";
-import { Socials } from "./auth";
 
 import { useEffect, useState } from "react";
-import { getDoc, doc } from "@firebase/firestore";
+// import { getDoc, doc } from "@firebase/firestore";
+import { useRouter } from "next/router";
 
 export default function Dashboard() {
   let [data, setData] = useState<any>();
   console.log(data);
 
   const [user] = useAuthState(auth);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth");
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -26,20 +34,19 @@ export default function Dashboard() {
 
   //   fetchData();
   // }, [user]);
+
   return (
     <>
       <Meta title="Formie-Account" />
-      {user ? <Header /> : null}
+      {user && <Header />}
 
       {user ? (
         <div>
           <div className="flex flex-row w-screen justify-center items-center">
-            {user ? (
-              <p className="text-center m-1 text-3xl text-secondary font-medium">
-                {" "}
-                Hoi, {user.displayName}{" "}
-              </p>
-            ) : null}
+            <p className="text-center m-1 text-3xl text-secondary font-medium">
+              {" "}
+              Hoi, {user.displayName}{" "}
+            </p>
 
             <Link href="/form" passHref>
               <button className="mx-6 rounded-lg m-4 p-3 px-5 font-medium text-white text-xl focus:ring-4 duration-200 bg-indigo-500">
@@ -67,7 +74,7 @@ export default function Dashboard() {
           </div>
         </div>
       ) : (
-        <Socials />
+        <p>Loading...</p>
       )}
     </>
   );
