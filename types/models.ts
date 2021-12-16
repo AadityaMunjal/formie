@@ -4,7 +4,7 @@ export interface Question {
 }
 
 export interface Form {
-  id: number;
+  authorId: string;
   title: string;
   heading: string;
   desc: string;

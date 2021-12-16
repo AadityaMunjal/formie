@@ -19,7 +19,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/form/[uid]/[id].jsx"
   ],
   "exclude": ["node_modules"]
 }

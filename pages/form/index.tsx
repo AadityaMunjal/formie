@@ -13,10 +13,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Question, Form } from "../../types/models";
 
 import {
-  doc,
-  updateDoc,
-  arrayUnion,
-  getDoc,
+  addDoc,
+  collection,
 } from "@firebase/firestore";
 
 export default function CreateForm() {
@@ -28,8 +26,6 @@ export default function CreateForm() {
   const [heading, setHeading] = useState("");
   const [desc, setDesc] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
-
-  const [allForms, setAllForms] = useState<Form[] | null>(null);
 
   const addQuestion = () => {
     if (val.trim() !== "") {
@@ -66,33 +62,27 @@ export default function CreateForm() {
 
   const sendForm = async () => {
     if (user) {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      docSnap ? setAllForms(docSnap.data()?.forms) : setAllForms(null);
-
       const areFieldsValid =
         title.trim() !== "" && heading.trim() !== "" && desc.trim() !== "" && questions.length !== 0;
 
       if (!areFieldsValid) {
         toast.error("Please fill all the fields");
       } else {
-        const form = {
-          id: allForms ? allForms.length + 1 : 1,
+        const form: Form = {
+          // auto id
+          authorId: user.uid,
           title,
           heading,
           desc,
           questions,
         };
 
-        await updateDoc(doc(db, "users", user.uid), {
-          forms: arrayUnion(form),
-        });
+        const docRef = await addDoc(collection(db, "forms"), form)
 
         resetInputState();
 
         toast.success("Form created successfully");
-        console.log(`/form/${user.uid}/${form.id}`);
+        console.log(`/form/${docRef.id}`);
       }
     }
   };
