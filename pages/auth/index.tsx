@@ -5,13 +5,14 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
 import { useRouter } from "next/router";
-import { auth } from "../../firebase.config";
+import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
   GithubAuthProvider,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Auth() {
   let [user] = useAuthState(auth);
@@ -30,9 +31,23 @@ export default function Auth() {
     signInWithRedirect(auth, provider)
   };
 
+  const storeUser = async () => {
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        name: user.displayName,
+        pfp: user.photoURL,
+        uid: user.uid,
+      },
+      { merge: true }
+    );
+  }
+
   useEffect(() => {
     if (user) {
-      router.push("/dashboard")
+      storeUser().then(() => {
+        router.push("/dashboard")
+      })
     }
   }, [user])
 

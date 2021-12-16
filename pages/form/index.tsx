@@ -2,7 +2,7 @@ import { Header, Meta } from "../../components";
 import { Short, Heading, Title } from "../../components/form";
 
 import { toast, Toaster } from "react-hot-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { BiPaperPlane } from "react-icons/bi";
 import { Input } from "@chakra-ui/react";
@@ -10,60 +10,45 @@ import { Input } from "@chakra-ui/react";
 import { auth, db } from "../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+import { Question, Form } from "../../types/models";
+
 import {
-  setDoc,
   doc,
   updateDoc,
   arrayUnion,
-  serverTimestamp,
   getDoc,
 } from "@firebase/firestore";
 
 export default function CreateForm() {
   const [user] = useAuthState(auth);
 
-  // storing user's metadata
-  useEffect(() => {
-    async function addUser() {
-      await setDoc(
-        doc(db, "users", user.uid),
+  const [val, setVal] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [heading, setHeading] = useState("");
+  const [desc, setDesc] = useState("");
+  const [questions, setQuestions] = useState<Question[]>([]);
+
+  const [allForms, setAllForms] = useState<Form[] | null>(null);
+
+  const addQuestion = () => {
+    if (val.trim() !== "") {
+      setQuestions([
+        ...questions,
         {
-          name: user.displayName,
-          pfp: user.photoURL,
-          uid: user.uid,
+          text: val,
+          id: questions.length + 1,
         },
-        { merge: true }
-      );
+      ]);
+
+      setVal("");
+      toast.success("Question added");
+    } else {
+      toast.error("Question field empty!")
     }
-
-    addUser();
-  }, [user]);
-
-  let [val, setVal] = useState("");
-
-  let [title, setTitle] = useState("");
-  let [heading, setHeading] = useState("");
-  let [desc, setDesc] = useState("");
-  let [questions, setQuestions] = useState([]);
-
-  let [data, setData] = useState<any>();
-
-  const add = () => {
-    val === ""
-      ? null
-      : setQuestions([
-          ...questions,
-          {
-            text: val,
-            id: questions.length + 1,
-          },
-        ]);
-
-    setVal("");
-    toast.success("Question added");
   };
 
-  const dlt = (id: any) => {
+  const deleteQuestion = (id: any) => {
     const removeQues = questions.filter((todo) => {
       return todo.id !== id;
     });
@@ -72,51 +57,45 @@ export default function CreateForm() {
     toast.error("Question deleted");
   };
 
-  const send = async () => {
+  const resetInputState = () => {
+    setTitle("");
+    setHeading("");
+    setDesc("");
+    setQuestions([]);
+  };
+
+  const sendForm = async () => {
     if (user) {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
 
-      docSnap ? setData(docSnap.data().forms) : setData(null);
+      docSnap ? setAllForms(docSnap.data()?.forms) : setAllForms(null);
 
-      if (
-        title === "" ||
-        heading === "" ||
-        desc === "" ||
-        questions.length === 0
-      ) {
-        console.log("empty");
+      const areFieldsValid =
+        title.trim() !== "" && heading.trim() !== "" && desc.trim() !== "" && questions.length !== 0;
+
+      if (!areFieldsValid) {
         toast.error("Please fill all the fields");
       } else {
         const form = {
-          id: data ? data.length() + 1 : 1,
-          title: title,
-          heading: heading,
-          desc: desc,
-          questions: questions,
+          id: allForms ? allForms.length + 1 : 1,
+          title,
+          heading,
+          desc,
+          questions,
         };
 
-        if (docSnap) {
-          await updateDoc(doc(db, "users", user.uid), {
-            forms: arrayUnion(form),
-          });
-        } else {
-          await setDoc(doc(db, "users", user.uid), {
-            forms: arrayUnion(form),
-          });
-        }
-        setTitle("");
-        setHeading("");
-        setDesc("");
-        setQuestions([]);
+        await updateDoc(doc(db, "users", user.uid), {
+          forms: arrayUnion(form),
+        });
+
+        resetInputState();
 
         toast.success("Form created successfully");
-
         console.log(`/form/${user.uid}/${form.id}`);
       }
     }
   };
-
   return (
     <>
       <Toaster />
@@ -134,7 +113,7 @@ export default function CreateForm() {
         <div className="w-full grid justify-items-center">
           <button
             className="flex flex-row justify-center items-center p-3 px-5 rounded-md bg-purple-600 text-white text-xl focus:ring-4 ring-purple-300"
-            onClick={send}
+            onClick={sendForm}
           >
             Send <BiPaperPlane size={25} className="mx-2" />
           </button>
@@ -160,14 +139,14 @@ export default function CreateForm() {
             <div className="w-full flex justify-center ">
               <button
                 className="my-2 mx-6 p-3 px-5 bg-purple-600 rounded font-poppins font-medium text-xl text-white focus:ring-4 ring-purple-400 cursor-pointer hover:bg-purple-500 transition-all duration-4"
-                onClick={add}
+                onClick={addQuestion}
               >
                 Add
               </button>
             </div>
           </div>
           {questions.map((q) => (
-            <Short short={q.text} key={q.id} dlt={() => dlt(q.id)} />
+            <Short short={q.text} key={q.id} dlt={() => deleteQuestion(q.id)} />
           ))}
         </div>
       </div>
